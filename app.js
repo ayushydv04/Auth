@@ -8,6 +8,9 @@ require("dotenv").config()
 const connectToDb = require("./config/mongoose-connection");
 const cookieParser = require("cookie-parser"); // requiring cookie parser
 
+// requiring auth route
+const authRoutes = require("./routes/authRoutes");
+
 
 // middleware requireing
 app.use(express.json());
@@ -17,9 +20,8 @@ app.use(cookieParser())
 connectToDb()   // running connect-to-db to connect to the database
 
 
-app.get("/", function(req, res) {
-    res.send("Hello World!");
-})
+// Creating routes
+app.use("/api/auth", authRoutes);
 
 
 app.listen(3000, function() {
